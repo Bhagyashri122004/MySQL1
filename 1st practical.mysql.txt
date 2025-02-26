@@ -1,0 +1,134 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.41 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++---------------------------+
+| Database                  |
++---------------------------+
+| anp_d0453                 |
+| information_schema        |
+| mysql                     |
+| performance_schema        |
+| sakila                    |
+| student_management_system |
+| sys                       |
+| world                     |
++---------------------------+
+8 rows in set (0.01 sec)
+
+mysql> create database company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++---------------------------+
+| Database                  |
++---------------------------+
+| anp_d0453                 |
+| company                   |
+| information_schema        |
+| mysql                     |
+| performance_schema        |
+| sakila                    |
+| student_management_system |
+| sys                       |
+| world                     |
++---------------------------+
+9 rows in set (0.00 sec)
+
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql> use company;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create table emp(emp_id varchar(10) not null primary key,emp_name varchar(50) not null,emp_mobileno varchar(15) not null,emp_address varchar(100) not null,emp_salary decimal(10,2));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc emp;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | varchar(10)   | NO   | PRI | NULL    |       |
+| emp_name     | varchar(50)   | NO   |     | NULL    |       |
+| emp_mobileno | varchar(15)   | NO   |     | NULL    |       |
+| emp_address  | varchar(100)  | NO   |     | NULL    |       |
+| emp_salary   | decimal(10,2) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into emp(emp_id,emp_name,emp_mobileno,emp_address,emp_salary)values(1,'Sony','5356473483','New York',50000),(2,'Pari','1232434476','Delhi',45656),(3,'Niti','6574839765','Solapur',67588),(4,'Tanu','7856432109','Nagpur',87654),(5,'Priya','9865432890','Mumbai',90765);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp;
++--------+----------+--------------+-------------+------------+
+| emp_id | emp_name | emp_mobileno | emp_address | emp_salary |
++--------+----------+--------------+-------------+------------+
+| 1      | Sony     | 5356473483   | New York    |   50000.00 |
+| 2      | Pari     | 1232434476   | Delhi       |   45656.00 |
+| 3      | Niti     | 6574839765   | Solapur     |   67588.00 |
+| 4      | Tanu     | 7856432109   | Nagpur      |   87654.00 |
+| 5      | Priya    | 9865432890   | Mumbai      |   90765.00 |
++--------+----------+--------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from emp where emp_name LIKE 'N%';
++--------+----------+--------------+-------------+------------+
+| emp_id | emp_name | emp_mobileno | emp_address | emp_salary |
++--------+----------+--------------+-------------+------------+
+| 3      | Niti     | 6574839765   | Solapur     |   67588.00 |
++--------+----------+--------------+-------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp where emp_address LIKE '%pur%;
+    '>
+    '> select * from emp where emp_address LIKE '%pur%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%pur%' at line 3
+mysql> select *from emp where emp_address LIKE '%pur;
+    '>
+    '> select *from emp where emp_address LIKE '%pur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%pur' at line 3
+mysql> select * from emp where emp_address LIKE '%pur%';
++--------+----------+--------------+-------------+------------+
+| emp_id | emp_name | emp_mobileno | emp_address | emp_salary |
++--------+----------+--------------+-------------+------------+
+| 3      | Niti     | 6574839765   | Solapur     |   67588.00 |
+| 4      | Tanu     | 7856432109   | Nagpur      |   87654.00 |
++--------+----------+--------------+-------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select *from emp where emp_name LIKE '_a%';
++--------+----------+--------------+-------------+------------+
+| emp_id | emp_name | emp_mobileno | emp_address | emp_salary |
++--------+----------+--------------+-------------+------------+
+| 2      | Pari     | 1232434476   | Delhi       |   45656.00 |
+| 4      | Tanu     | 7856432109   | Nagpur      |   87654.00 |
++--------+----------+--------------+-------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from emp where emp_id='1';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from emp;
++--------+----------+--------------+-------------+------------+
+| emp_id | emp_name | emp_mobileno | emp_address | emp_salary |
++--------+----------+--------------+-------------+------------+
+| 2      | Pari     | 1232434476   | Delhi       |   45656.00 |
+| 3      | Niti     | 6574839765   | Solapur     |   67588.00 |
+| 4      | Tanu     | 7856432109   | Nagpur      |   87654.00 |
+| 5      | Priya    | 9865432890   | Mumbai      |   90765.00 |
++--------+----------+--------------+-------------+------------+
+4 rows in set (0.00 sec)
+
+mysql>
